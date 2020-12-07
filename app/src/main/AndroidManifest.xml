@@ -15,9 +15,11 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:usesCleartextTraffic="true"
-        android:theme="@style/AppTheme">
-        <activity android:name=".Profile.EditProfile"></activity>
+        android:theme="@style/AppTheme"
+        android:usesCleartextTraffic="true">
+        <activity android:name=".Party.Leeg"></activity>
+        <activity android:name=".Party.Party" />
+        <activity android:name=".Profile.EditProfile" />
         <activity android:name=".Profile.profile" />
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.

@@ -9,11 +9,10 @@ import androidx.drawerlayout.widget.DrawerLayout;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.provider.ContactsContract;
 import android.view.MenuItem;
 
 import com.example.fridgeapp.Fridge.Fridge;
-import com.example.fridgeapp.Profile.EditProfile;
+import com.example.fridgeapp.Party.Party;
 import com.example.fridgeapp.Profile.profile;
 import com.example.fridgeapp.login.Login;
 import com.example.fridgeapp.maps.MapsActivity;
@@ -72,6 +71,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 break;
             case R.id.nav_profile:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new profile()).commit();
+                break;
+            case R.id.nav_home:
+                startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                break;
+            case R.id.nav_beer:
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new Party()).commit();
+                break;
 
         }
         return true;

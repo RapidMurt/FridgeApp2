@@ -19,6 +19,11 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class Register extends AppCompatActivity {
 
@@ -27,18 +32,21 @@ public class Register extends AppCompatActivity {
     TextView mLoginButton;
     FirebaseAuth fAuth;
     ProgressBar progressBar;
+    FirebaseFirestore fStore;
+    String userId;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
 
-        mFullName = findViewById(R.id.textview3);
+        mFullName = findViewById(R.id.fullName);
         mEmail = findViewById(R.id.Email);
         mPassword = findViewById(R.id.password);
         mPhone = findViewById(R.id.phone);
         mRegisterButton = findViewById(R.id.registerbutton);
         mLoginButton = findViewById(R.id.CreateButton);
         fAuth = FirebaseAuth.getInstance();
+
         progressBar = findViewById(R.id.progressBar);
 
 
@@ -52,8 +60,10 @@ public class Register extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                String email = mEmail.getText().toString().trim();
+                final String email = mEmail.getText().toString().trim();
                 String password = mPassword.getText().toString().trim();
+                final String fullName = mFullName.getText().toString();
+                final String phone = mPhone.getText().toString();
 
                 if(TextUtils.isEmpty(email))
                 {
@@ -77,30 +87,21 @@ public class Register extends AppCompatActivity {
                 fAuth.createUserWithEmailAndPassword(email,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
-                      if(task.isSuccessful())
-                      {
-                          /*//verify mail
-                          FirebaseUser fUser = fAuth.getCurrentUser();
-                          fUser.sendEmailVerification().addOnSuccessListener(new OnSuccessListener<Void>() {
-                              @Override
-                              public void onSuccess(Void aVoid) {
-                                  Toast.makeText(Register.this , "Verification Email has been send." , Toast.LENGTH_SHORT).show();
-                              }
-                          }).addOnFailureListener(new OnFailureListener() {
-                              @Override
-                              public void onFailure(@NonNull Exception e) {
-                                  Log.d(TAG, "onFailure: Email not send " + e.getMessage());
-                              }
-                          });*/
-
-                          Toast.makeText(Register.this , "User Created" , Toast.LENGTH_SHORT).show();
-                          startActivity(new Intent(getApplicationContext(), MainActivity.class));
-                      }
-                      else
-                      {
-                          Toast.makeText(Register.this ,"Error! " + task.getException().getMessage() , Toast.LENGTH_SHORT).show();
-                      }
+                        if (task.isSuccessful()) {
+                            Toast.makeText(Register.this, "User Created", Toast.LENGTH_SHORT).show();
+                            userId = fAuth.getCurrentUser().getUid();
+                            DocumentReference documentReference = fStore.collection("users").document(userId);
+                            Map<String,Object> user = new HashMap<>();
+                            user.put("fName", fullName);
+                            user.put("email" , email);
+                            user.put("phone" , phone);
+                            startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                        } else {
+                            Toast.makeText(Register.this, "Error! " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                            progressBar.setVisibility(View.GONE);
+                        }
                     }
+
                 });
             }
         });

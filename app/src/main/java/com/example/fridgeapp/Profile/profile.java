@@ -28,6 +28,11 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.EventListener;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
@@ -38,7 +43,9 @@ public class profile extends Fragment {
     Button resetPassLocal , changeProfileImage;
     TextView fullName , email, phone, verifyMsg;
     FirebaseAuth fAuth;
+    FirebaseFirestore fStore;
     FirebaseUser user;
+    String userId;
     ImageView profileImage;
     StorageReference storageReference;
 
@@ -56,7 +63,9 @@ public class profile extends Fragment {
         profileImage = view.findViewById(R.id.ImageProfile);
         changeProfileImage = view.findViewById(R.id.ResetProfileBtn);
         fAuth = FirebaseAuth.getInstance();
+        fStore =FirebaseFirestore.getInstance();
         user = fAuth.getCurrentUser();
+        userId = fAuth.getCurrentUser().getUid();
         storageReference = FirebaseStorage.getInstance().getReference();
 
         StorageReference profileRef = storageReference.child("users/"+fAuth.getCurrentUser().getUid()+"/profile.jpg");
@@ -66,6 +75,14 @@ public class profile extends Fragment {
                 Picasso.get().load(uri).into(profileImage);
             }
         });
+
+        final DocumentReference documentReference = fStore.collection("users").document(userId);
+        documentReference.addSnapshotListener(this, new EventListener<DocumentSnapshot>() {
+            @Override
+            public void onEvent(@Nullable DocumentSnapshot value, @Nullable FirebaseFirestoreException error) {
+                phone.setText(DocumentSnapshot.);
+            }
+        })
 
         resetPassLocal.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -105,6 +122,7 @@ public class profile extends Fragment {
                 passwordResetDialog.create().show();
             }
         });
+
         changeProfileImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -114,9 +132,9 @@ public class profile extends Fragment {
                 startActivityForResult(openGalleryIntent, 1000);*/
 
                 Intent i = new Intent(v.getContext(), EditProfile.class);
-                i.putExtra("fullName" , "Bert Mombeek");
-                i.putExtra("email" , "bertmombeek@gmail.com");
-                i.putExtra("phone" , "0471449988");
+                i.putExtra("fullName" , fullName.getText().toString());
+                i.putExtra("email" ,email.getText().toString());
+                i.putExtra("phone" , phone.getText().toString());
                 startActivity(i);
 
             }

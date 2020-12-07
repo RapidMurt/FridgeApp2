@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -16,6 +17,7 @@ import android.widget.Toast;
 import com.example.fridgeapp.MainActivity;
 import com.example.fridgeapp.R;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
@@ -27,6 +29,7 @@ import java.util.Map;
 
 public class Register extends AppCompatActivity {
 
+    private static final String TAG = "TAG" ;
     EditText mFullName , mEmail , mPassword, mPhone;
     Button mRegisterButton;
     TextView mLoginButton;
@@ -46,6 +49,7 @@ public class Register extends AppCompatActivity {
         mRegisterButton = findViewById(R.id.registerbutton);
         mLoginButton = findViewById(R.id.CreateButton);
         fAuth = FirebaseAuth.getInstance();
+        fStore = FirebaseFirestore.getInstance();
 
         progressBar = findViewById(R.id.progressBar);
 
@@ -95,6 +99,12 @@ public class Register extends AppCompatActivity {
                             user.put("fName", fullName);
                             user.put("email" , email);
                             user.put("phone" , phone);
+                            documentReference.set(user).addOnSuccessListener(new OnSuccessListener<Void>() {
+                                @Override
+                                public void onSuccess(Void aVoid) {
+                                    Log.d(TAG , "onSuccess: user profile is created for " + userId);
+                                }
+                            });
                             startActivity(new Intent(getApplicationContext(), MainActivity.class));
                         } else {
                             Toast.makeText(Register.this, "Error! " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();

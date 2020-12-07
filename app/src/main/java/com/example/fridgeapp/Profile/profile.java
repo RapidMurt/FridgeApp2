@@ -12,6 +12,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -37,6 +38,8 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 import com.squareup.picasso.Picasso;
+
+import java.util.concurrent.Executor;
 
 public class profile extends Fragment {
 
@@ -68,7 +71,7 @@ public class profile extends Fragment {
         userId = fAuth.getCurrentUser().getUid();
         storageReference = FirebaseStorage.getInstance().getReference();
 
-        StorageReference profileRef = storageReference.child("users/"+fAuth.getCurrentUser().getUid()+"/profile.jpg");
+        StorageReference profileRef = storageReference.child("users/" + fAuth.getCurrentUser().getUid() + "/profile.jpg");
         profileRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
             @Override
             public void onSuccess(Uri uri) {
@@ -76,13 +79,23 @@ public class profile extends Fragment {
             }
         });
 
-        final DocumentReference documentReference = fStore.collection("users").document(userId);
-        documentReference.addSnapshotListener(this, new EventListener<DocumentSnapshot>() {
+
+        DocumentReference documentReference = fStore.collection("users").document(userId);
+        documentReference.addSnapshotListener(getActivity(), new EventListener<DocumentSnapshot>() {
             @Override
             public void onEvent(@Nullable DocumentSnapshot value, @Nullable FirebaseFirestoreException error) {
-                phone.setText(DocumentSnapshot.);
-            }
-        })
+                        if(value.exists()){
+
+                            email.setText(value.getString("email"));
+                            fullName.setText(value.getString("fName"));
+                            phone.setText(value.getString("phone"));
+                        }
+                        else {
+                            Log.d("tag" , "onEvent: Document do not exists");
+                        }
+                    }
+        });
+
 
         resetPassLocal.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -148,37 +161,5 @@ public class profile extends Fragment {
         super.onCreate(savedInstanceState);
     }
 
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if(requestCode== 1000){
-            if(resultCode == Activity.RESULT_OK){
-                Uri imageUri =data.getData();
-                //profileImage.setImageURI((imageUri));
 
-                uploadImageToFirebase(imageUri);
-            }
-        }
-
-    }
-
-    private void uploadImageToFirebase(Uri imageUri) {
-        final StorageReference fileReference = storageReference.child("users/"+fAuth.getCurrentUser().getUid()+"/profile.jpg");
-        fileReference.putFile(imageUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-            @Override
-            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                fileReference.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-                    @Override
-                    public void onSuccess(Uri uri) {
-                        Picasso.get().load(uri).into(profileImage);
-                    }
-                });
-            }
-        }).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception e) {
-                Toast.makeText(getActivity(), "Failed" , Toast.LENGTH_SHORT).show();
-            }
-        });
-    }
 }

@@ -15,19 +15,22 @@
             android:title="Chat"/>
     </group>
 
-    <item android:title="Functions">
-        <menu>
-            <item android:id="@+id/nav_fridge"
-                android:icon="@drawable/frigowit"
-                android:title="Your fridge"/>
-            <item android:id="@+id/nav_freezer"
-                android:icon="@drawable/freezer"
-                android:title="Your Freezer"/>
-            <item android:id="@+id/nav_beer"
-                android:icon="@drawable/beer"
-                android:title="Party Mode"/>
-        </menu>
-    </item>
+    <group android:checkableBehavior="single">
+     <item android:title="Functions">
+         <menu>
+             <item android:id="@+id/nav_fridge"
+                 android:icon="@drawable/frigowit"
+                 android:title="Your fridge"/>
+             <item android:id="@+id/nav_freezer"
+                 android:icon="@drawable/freezer"
+                 android:title="Your Freezer"/>
+             <item android:id="@+id/nav_beer"
+                 android:icon="@drawable/beer"
+                 android:title="Party Mode"/>
+         </menu>
+     </item>
+ </group>
+
 
     <item android:title="More">
         <menu>

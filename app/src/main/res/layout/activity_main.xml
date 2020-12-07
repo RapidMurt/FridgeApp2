@@ -28,13 +28,13 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <TextView
+           <!-- <TextView
                 android:layout_width="200dp"
                 android:layout_height="200dp"
                 android:text="Welkom"
                 android:textColor="@color/cardview_light_background">
 
-            </TextView>
+            </TextView>-->
 
         </FrameLayout>
 

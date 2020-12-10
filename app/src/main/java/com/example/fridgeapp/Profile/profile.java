@@ -81,7 +81,7 @@ public class profile extends Fragment {
 
 
         DocumentReference documentReference = fStore.collection("users").document(userId);
-        documentReference.addSnapshotListener(getActivity(), new EventListener<DocumentSnapshot>() {
+        documentReference.addSnapshotListener(new EventListener<DocumentSnapshot>() {
             @Override
             public void onEvent(@Nullable DocumentSnapshot value, @Nullable FirebaseFirestoreException error) {
                         if(value.exists()){

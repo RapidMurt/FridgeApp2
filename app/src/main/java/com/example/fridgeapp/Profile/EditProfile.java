@@ -62,6 +62,7 @@ public class EditProfile extends AppCompatActivity {
         profileFullName = findViewById(R.id.editProfileName);
         profileEmail = findViewById(R.id.editEmailAdress);
         profilePhone = findViewById(R.id.editPhone);
+        profileImageView = findViewById(R.id.ProfilePic);
         saveBtn = findViewById(R.id.saveButton);
         cancelBtn = findViewById(R.id.CancelBtn);
 
@@ -103,7 +104,6 @@ public class EditProfile extends AppCompatActivity {
                             public void onSuccess(Void aVoid) {
                                 Toast.makeText(EditProfile.this, "Profile Updated" , Toast.LENGTH_SHORT).show();
                                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new profile()).commit();
-                                finish();
                             }
                         }) ;// onsuccces...
                         Toast.makeText(EditProfile.this, "Email is changed." , Toast.LENGTH_SHORT).show();

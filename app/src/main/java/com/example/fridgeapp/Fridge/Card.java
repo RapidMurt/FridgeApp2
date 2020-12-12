@@ -1,10 +1,13 @@
 package com.example.fridgeapp.Fridge;
 
+import androidx.annotation.Keep;
+
 public class Card {
     private String title;
     private String expireDate;
     private String type;
 
+    @Keep
     public Card()
     {
         //empty constructor needed

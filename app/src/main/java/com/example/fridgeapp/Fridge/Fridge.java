@@ -22,9 +22,6 @@ import com.google.firebase.firestore.Query;
 
 public class Fridge extends Fragment {
 
-    public static Fridge newInstance() {
-        return new Fridge();
-    }
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
     private CollectionReference notebookRef = db.collection("Notebook");
 
@@ -54,7 +51,7 @@ public class Fridge extends Fragment {
 
     private void setUpRecyclerView(View view){
 
-        Query query = notebookRef.orderBy("Type" , Query.Direction.DESCENDING);
+        Query query = notebookRef.orderBy("expireDate" , Query.Direction.ASCENDING);
 
         FirestoreRecyclerOptions<Card> options = new FirestoreRecyclerOptions.Builder<Card>()
                 .setQuery(query , Card.class)
@@ -62,8 +59,8 @@ public class Fridge extends Fragment {
         adapter = new ClassAdapter(options);
 
         RecyclerView recyclerView = view.findViewById(R.id.recycler_view);
-        recyclerView.setHasFixedSize(true);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        recyclerView.setHasFixedSize(true); //for preformins reaseons
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext())); //this
         recyclerView.setAdapter(adapter);
     }
 

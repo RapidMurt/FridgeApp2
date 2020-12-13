@@ -25,7 +25,7 @@ public class NewCardActivityFreezer extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.newcardfreezer);
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_close);
-        setTitle("Add Note");
+        setTitle("Add Product");
         editTextTitle = findViewById(R.id.edit_text_title);
         editTextExpireDate = findViewById(R.id.edit_text_expireDate);
         editTextType = findViewById(R.id.edit_text_type);
@@ -54,7 +54,7 @@ public class NewCardActivityFreezer extends AppCompatActivity {
         String expireDate= editTextExpireDate.getText().toString();
         String type = editTextType.getText().toString();
         if (title.trim().isEmpty() || expireDate.trim().isEmpty() || type.trim().isEmpty()) {
-            Toast.makeText(this, "Please insert a title , expireDate , Type", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Gelieve alles in te vullen!", Toast.LENGTH_SHORT).show();
             return;
         }
         CollectionReference notebookRef = FirebaseFirestore.getInstance()

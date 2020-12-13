@@ -18,12 +18,16 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".Party.Leeg"
-            tools:ignore="Instantiatable"></activity>
-        <activity android:name=".Party.Party"
+        <activity android:name=".Party.NewCardParty"></activity>
+        <activity
+            android:name=".Party.Leeg"
+            tools:ignore="Instantiatable" />
+        <activity
+            android:name=".Party.Party"
             tools:ignore="Instantiatable" />
         <activity android:name=".Profile.EditProfile" />
-        <activity android:name=".Profile.profile"
+        <activity
+            android:name=".Profile.profile"
             tools:ignore="Instantiatable" />
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
@@ -41,10 +45,12 @@
             android:name=".maps.MapsActivity"
             android:label="@string/title_activity_maps" />
         <activity android:name=".Fridge.NewCardActivity" />
-        <activity android:name=".Fridge.Fridge"
+        <activity
+            android:name=".Fridge.Fridge"
             tools:ignore="Instantiatable" />
-        <activity android:name=".Freezer.NewCardActivityFreezer"/>
-        <activity android:name=".Freezer.Freezer"
+        <activity android:name=".Freezer.NewCardActivityFreezer" />
+        <activity
+            android:name=".Freezer.Freezer"
             tools:ignore="Instantiatable" />
         <activity android:name=".login.Login" />
         <activity android:name=".login.Register">

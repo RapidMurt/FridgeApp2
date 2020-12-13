@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Party.NewCardParty"
+    android:padding="16dp"
+    android:orientation="vertical">
+
+
+        <EditText
+            android:id="@+id/edit_text_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Title"
+            android:inputType="text"
+            android:layout_margin="8dp"/>
+        <EditText
+            android:id="@+id/edit_text_type"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:hint="Type"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Price"
+            android:textSize="30dp"
+            android:layout_margin="8dp"
+
+            />
+        <NumberPicker
+            android:id="@+id/edit_text_Price"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Prijs"
+            android:inputType="number"
+            android:layout_margin="8dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Aantal"
+            android:textSize="30dp"
+            android:layout_margin="8dp"
+
+            />
+
+        <NumberPicker
+            android:id="@+id/edit_text_Quantity"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Aantal"
+            android:inputType="number"
+            android:layout_margin="8dp"/>
+
+
+</LinearLayout>

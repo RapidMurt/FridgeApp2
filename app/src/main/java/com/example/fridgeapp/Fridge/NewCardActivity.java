@@ -25,7 +25,7 @@ public class NewCardActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_card);
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_close);
-        setTitle("Add Note");
+        setTitle("Add Product");
         editTextTitle = findViewById(R.id.edit_text_title);
         editTextExpireDate = findViewById(R.id.edit_text_expireDate);
         editTextType = findViewById(R.id.edit_text_type);

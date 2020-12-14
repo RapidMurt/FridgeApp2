@@ -25,6 +25,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="left|bottom"
-        android:text="Opgedronken" />
+        android:text="Opgedronken"
+        android:layout_marginBottom="8dp"/>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

@@ -16,7 +16,7 @@
         android:layout_marginRight="30dp"
         android:backgroundTint="#FFFFFF"
         android:fontFamily="@font/aclonica"
-        android:inputType="number|numberDecimal"
+        android:inputType="number"
         android:shadowColor="#FFFFFF"
         android:text="4"
         android:textAlignment="center"
@@ -90,5 +90,22 @@
         app:layout_constraintHorizontal_bias="0.504"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/billAmount" />
+
+    <TextView
+        android:id="@+id/textViewResult"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:text="Result"
+        android:textSize="24dp"
+        android:textColor="#FFFFFF"
+        android:textAlignment="center"
+        app:layout_constraintBottom_toTopOf="@+id/splitBtn"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.75"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/AmountOffPersons"
+        app:layout_constraintVertical_bias="0.22000003"
+        tools:ignore="MissingConstraints" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

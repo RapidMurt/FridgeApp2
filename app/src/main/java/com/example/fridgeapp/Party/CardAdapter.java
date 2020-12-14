@@ -34,7 +34,10 @@ public class CardAdapter extends FirestoreRecyclerAdapter<CardParty , CardAdapte
         View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.cardparty , parent, false);
         return new CardHolder(v);
     }
-
+    public void deleteItem(int position)
+    {
+        getSnapshots().getSnapshot(position).getReference().delete();
+    }
     class CardHolder extends RecyclerView.ViewHolder
     {
         TextView textViewTitle;

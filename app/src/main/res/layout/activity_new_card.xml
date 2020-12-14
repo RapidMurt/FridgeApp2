@@ -14,20 +14,40 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Title"
-        android:inputType="text"/>
-    <EditText
+        android:inputType="text"
+        android:textSize="18sp" />
+
+    <TextView
         android:id="@+id/edit_text_expireDate"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Date"
-        android:inputType="text"/>
+        android:layout_marginTop="16dp"
+        android:hint="Houdbaarsheids datum"
+        android:textAlignment="textStart"
+        android:textSize="18sp"></TextView>
 
-    <EditText
+  <!-- <TextView
+        android:id="@+id/edit_text_expireDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="Date"
+       android:layout_marginTop="16dp"/>-->
+
+
+    <Spinner
         android:id="@+id/edit_text_type"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:hint="Type:"
-        android:textAppearance="@android:style/TextAppearance.Medium"/>
+        android:entries="@array/SpinFood"
+        android:spinnerMode="dialog" />
+
+    <!--<EditText
+        android:id="@+id/edit_text_type"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:hint="Type"
+        android:textAppearance="@android:style/TextAppearance.Medium" />-->
 
 </LinearLayout>

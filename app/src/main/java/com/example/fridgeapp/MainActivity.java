@@ -39,13 +39,29 @@ import com.squareup.picasso.Picasso;
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     private DrawerLayout drawer;
-    
+    /*TextView fullName , email;
+    FirebaseAuth fAuth;
+    FirebaseFirestore fStore;
+    FirebaseUser user;
+    String userId;
+    ImageView profileImage;
+    StorageReference storageReference;*/
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+       /* email = findViewById(R.id.profileMailAdressNav);
+        fullName = findViewById(R.id.profileFullNameNav);
+        profileImage = findViewById(R.id.ImageProfileNav);
+        fAuth = FirebaseAuth.getInstance();
+        fStore =FirebaseFirestore.getInstance();
+        user = fAuth.getCurrentUser();
+        userId = fAuth.getCurrentUser().getUid();
+        storageReference = FirebaseStorage.getInstance().getReference();*/
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -60,6 +76,32 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
+
+        /*StorageReference profileRef = storageReference.child("users/" + userId + "/profile.jpg");
+        profileRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+            @Override
+            public void onSuccess(Uri uri) {
+                Picasso.get().load(uri).into(profileImage);
+            }
+        });
+
+        DocumentReference documentReference = fStore.collection("users").document(userId);
+        documentReference.addSnapshotListener(new EventListener<DocumentSnapshot>() {
+            @Override
+            public void onEvent(@Nullable DocumentSnapshot value, @Nullable FirebaseFirestoreException error) {
+                if(value.exists()){
+
+                    email.setText(value.getString("email"));
+                    fullName.setText(value.getString("fName"));
+                }
+                else {
+                    Log.d("tag" , "onEvent: Document do not exists");
+                }
+            }
+        });*/
+
+
+
     }
     @Override
     public void onBackPressed() {

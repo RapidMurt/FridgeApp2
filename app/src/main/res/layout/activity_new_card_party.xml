@@ -16,35 +16,31 @@
             android:hint="Title"
             android:inputType="text"
             android:layout_margin="8dp"/>
-        <EditText
+
+        <Spinner
             android:id="@+id/edit_text_type"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="8dp"
-            android:hint="Type"
-            />
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Price"
-            android:textSize="30dp"
-            android:layout_margin="8dp"
+            android:entries="@array/SpinPartyDrinks"
+            android:spinnerMode="dialog" />
 
-            />
-        <NumberPicker
+        <EditText
+            android:layout_marginTop="16dp"
             android:id="@+id/edit_text_Price"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Prijs"
-            android:inputType="number"
-            android:layout_margin="8dp"/>
+            android:layout_margin="8dp"
+            android:inputType="numberDecimal"
+            android:hint="Price"
+            />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Aantal"
-            android:textSize="30dp"
             android:layout_margin="8dp"
+            android:text="Aantal"
+            android:textSize="18sp"
 
             />
 

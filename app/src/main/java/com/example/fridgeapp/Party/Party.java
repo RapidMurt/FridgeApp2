@@ -3,6 +3,7 @@ package com.example.fridgeapp.Party;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -64,7 +65,7 @@ public class Party extends Fragment {
 
     private void setUpRecyclerView(View view){
 
-        Query query = notebookRef.orderBy("quantity" , Query.Direction.DESCENDING);
+        Query query = notebookRef.orderBy("quantity" , Query.Direction.ASCENDING);
 
         FirestoreRecyclerOptions<CardParty> options = new FirestoreRecyclerOptions.Builder<CardParty>()
                 .setQuery(query , CardParty.class)
@@ -75,6 +76,18 @@ public class Party extends Fragment {
         recyclerView.setHasFixedSize(true); //for preformins reaseons
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext())); //this
         recyclerView.setAdapter(adapter);
+
+        new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0 , ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
+            @Override
+            public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder target) {
+                return false;
+            }
+
+            @Override
+            public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
+                adapter.deleteItem(viewHolder.getAdapterPosition());
+            }
+        }).attachToRecyclerView(recyclerView);
     }
 
     @Override

@@ -6,14 +6,14 @@ public class CardParty {
 
     private String title;
     private int quantity;
-    private int price;
+    private double price;
     private String type;
     @Keep
     public CardParty()
     {
         //empty constructor needed
     }
-    public CardParty (String title, int quantity  , String type , int price)
+    public CardParty (String title, int quantity  , String type , double price)
     {
         this.title = title;
         this.quantity = quantity;
@@ -29,7 +29,7 @@ public class CardParty {
         return quantity;
     }
 
-    public int getPrice() {
+    public double getPrice() {
         return price;
     }
 

@@ -30,6 +30,11 @@ public class ClassAdapter extends FirestoreRecyclerAdapter<Card, ClassAdapter.Cl
         return new ClassHolder(v);
     }
 
+    public void deleteItem(int position)
+    {
+        getSnapshots().getSnapshot(position).getReference().delete();
+    }
+
     class ClassHolder extends RecyclerView.ViewHolder{
         TextView textViewTitle;
         TextView textViewExpireDate;

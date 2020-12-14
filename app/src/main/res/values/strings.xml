@@ -24,4 +24,35 @@
 
     <string name="hello_first_fragment">Hello first fragment</string>
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
+
+    <string-array name="SpinPartyDrinks">
+        <item name ="Bier">Bier</item>
+        <item name ="Sterke Drank">Sterke Drank</item>
+        <item name ="Wijn">Wijn</item>
+        <item name ="Cava">Cava</item>
+        <item name ="Kriek">Kriek</item>
+        <item name ="CockTail">CockTail</item>
+        <item name ="Zwaar bier">Zwaar bier</item>
+    </string-array>
+
+    <string-array name="SpinFood">
+        <item  name="Vetten en Olie">Vetten en Olie</item>
+        <item name ="Vlees">Vlees</item>
+        <item name = "Vis en Zeevruchten">Vis en Zeevruchten</item>
+        <item name = "Kaas">Kaas</item>
+        <item name = "Zuivel">Zuivel</item>
+        <item name = "Groente">Groente</item>
+        <item name = "Fruit">Fruit</item>
+        <item name = "Noten, Pitten en Zaden" >Noten, Pitten en Zaden</item>
+        <item name = "Ei">Ei</item>
+        <item name = "Dranken">Dranken</item>
+        <item name = "Deegwaren">Deegwaren</item>
+        <item name = "Fastfood">Fastfood</item>
+        <item name = "Smaakmakers">Smaakmakers</item>
+        <item name = "Rijst">Rijst</item>
+        <item name = "Vegi">Vegi</item>
+        <item name = "Ijs">Ijs</item>
+        <item name ="Brood, graanproducten en aardappelen">Brood, graanproducten en aardappelen</item>
+        <item name ="Koek, snoep en snacks">Koek, snoep en snacks</item>
+    </string-array>
 </resources>

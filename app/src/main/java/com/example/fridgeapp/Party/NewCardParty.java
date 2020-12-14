@@ -7,8 +7,10 @@ import android.text.Editable;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.EditText;
 import android.widget.NumberPicker;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.example.fridgeapp.Freezer.Freezer;
@@ -19,23 +21,23 @@ import com.google.firebase.firestore.FirebaseFirestore;
 
 public class NewCardParty extends AppCompatActivity {
 
+    private EditText editTextPrice;
     private EditText editTextTitle;
     private NumberPicker editTextQuantity;
-    private NumberPicker editTextPrice;
-    private EditText editTextType;
+    private Spinner editTextType;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_card_party);
+
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_close);
         setTitle("Add Drink");
         editTextTitle = findViewById(R.id.edit_text_title);
         editTextType = findViewById(R.id.edit_text_type);
-
         editTextPrice = findViewById(R.id.edit_text_Price);
-        editTextPrice.setMinValue(1);
-        editTextPrice.setMaxValue(5000);
+
+
 
         editTextQuantity = findViewById(R.id.edit_text_Quantity);
         editTextQuantity.setMinValue(1);
@@ -63,8 +65,8 @@ public class NewCardParty extends AppCompatActivity {
     private void saveNote() {
         String title = editTextTitle.getText().toString();
         int Quantity = editTextQuantity.getValue();
-        int Price = editTextPrice.getValue();
-        String type = editTextType.getText().toString();
+        String type = editTextType.getSelectedItem().toString();
+        double Price = Double.parseDouble((editTextPrice.getText().toString()));
 
         if (title.trim().isEmpty() ||  type.trim().isEmpty()) {
             Toast.makeText(this, "Gelieve alles in te vullen!", Toast.LENGTH_SHORT).show();

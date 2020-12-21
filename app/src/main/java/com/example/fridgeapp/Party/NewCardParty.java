@@ -56,7 +56,7 @@ public class NewCardParty extends AppCompatActivity {
                 saveNote();
                 return true;
             case R.id.close:
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new Party()).commit();
+                finish();
 
             default:
                 return super.onOptionsItemSelected(item);

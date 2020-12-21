@@ -120,7 +120,7 @@ public class EditProfile extends AppCompatActivity {
         cancelBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new profile()).commit();
+                finish();
             }
         });
 

@@ -62,7 +62,7 @@ public class NewCardActivityFreezer extends AppCompatActivity {
             @Override
             public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
                 month = month + 1;
-                String date = dayOfMonth + "/" + month + "/" + year;
+                String date = year + "/" + month + "/" + dayOfMonth;
                 editTextExpireDate.setText(date);
             }
         };
@@ -81,7 +81,7 @@ public class NewCardActivityFreezer extends AppCompatActivity {
                 saveNote();
                 return true;
             case R.id.close:
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new Freezer()).commit();
+                finish();
 
             default:
                 return super.onOptionsItemSelected(item);

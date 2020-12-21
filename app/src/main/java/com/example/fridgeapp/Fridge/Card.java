@@ -21,7 +21,9 @@ public class Card {
         this.quantity = quantity;
     }
 
-    public String getQuantity() { return quantity; }
+    public String getQuantity() {
+        return quantity;
+    }
 
     public String getTitle() {
         return title;

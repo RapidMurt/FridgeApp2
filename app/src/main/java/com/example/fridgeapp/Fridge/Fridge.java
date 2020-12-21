@@ -14,6 +14,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.TextView;
 
 import com.example.fridgeapp.R;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
@@ -27,7 +29,9 @@ public class Fridge extends Fragment {
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
     private CollectionReference notebookRef = db.collection("Notebook");
 
+
     private ClassAdapter adapter;
+
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
@@ -77,7 +81,6 @@ public class Fridge extends Fragment {
             }
         }).attachToRecyclerView(recyclerView);
     }
-
     @Override
     public void onStart() {
         super.onStart();

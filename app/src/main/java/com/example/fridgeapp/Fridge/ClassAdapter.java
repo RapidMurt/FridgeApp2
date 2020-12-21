@@ -3,6 +3,8 @@ package com.example.fridgeapp.Fridge;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -20,7 +22,7 @@ public class ClassAdapter extends FirestoreRecyclerAdapter<Card, ClassAdapter.Cl
     @Override
     protected void onBindViewHolder(@NonNull ClassHolder holder, int position, @NonNull Card model) {
         holder.textViewTitle.setText(model.getTitle());
-        holder.textViewExpireDate.setText(model.getExpireDate());
+        holder.textViewExpireDate.setText(String.valueOf(model.getExpireDate()));
         holder.textViewType.setText(model.getType());
         holder.textViewQuantity.setText(model.getQuantity());
     }
@@ -41,13 +43,17 @@ public class ClassAdapter extends FirestoreRecyclerAdapter<Card, ClassAdapter.Cl
         TextView textViewExpireDate;
         TextView textViewType;
         TextView textViewQuantity;
+        ImageView addImage;
 
         public ClassHolder(View itemView){
             super(itemView);
             textViewTitle = itemView.findViewById(R.id.textview_title);
             textViewExpireDate = itemView.findViewById(R.id.textview_expireDate);
             textViewType = itemView.findViewById(R.id.textview_type);
-            textViewQuantity = itemView.findViewById(R.id.textview_quantity);
+            textViewQuantity = itemView.findViewById(R.id.textview_quantity_fridge);
+            addImage = itemView.findViewById(R.id.ic_add_button);
+
+
         }
     }
 

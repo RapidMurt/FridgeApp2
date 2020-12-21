@@ -13,6 +13,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -39,13 +40,11 @@ import com.squareup.picasso.Picasso;
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     private DrawerLayout drawer;
-    /*TextView fullName , email;
     FirebaseAuth fAuth;
     FirebaseFirestore fStore;
     FirebaseUser user;
     String userId;
-    ImageView profileImage;
-    StorageReference storageReference;*/
+    StorageReference storageReference;
 
 
     @Override
@@ -54,14 +53,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-       /* email = findViewById(R.id.profileMailAdressNav);
-        fullName = findViewById(R.id.profileFullNameNav);
-        profileImage = findViewById(R.id.ImageProfileNav);
         fAuth = FirebaseAuth.getInstance();
         fStore =FirebaseFirestore.getInstance();
         user = fAuth.getCurrentUser();
         userId = fAuth.getCurrentUser().getUid();
-        storageReference = FirebaseStorage.getInstance().getReference();*/
+        storageReference = FirebaseStorage.getInstance().getReference();
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -72,35 +68,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         drawer = findViewById(R.id.drawer_layout);
 
 
+
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer, toolbar,
                 R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 
-        /*StorageReference profileRef = storageReference.child("users/" + userId + "/profile.jpg");
-        profileRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-            @Override
-            public void onSuccess(Uri uri) {
-                Picasso.get().load(uri).into(profileImage);
-            }
-        });
-
-        DocumentReference documentReference = fStore.collection("users").document(userId);
-        documentReference.addSnapshotListener(new EventListener<DocumentSnapshot>() {
-            @Override
-            public void onEvent(@Nullable DocumentSnapshot value, @Nullable FirebaseFirestoreException error) {
-                if(value.exists()){
-
-                    email.setText(value.getString("email"));
-                    fullName.setText(value.getString("fName"));
-                }
-                else {
-                    Log.d("tag" , "onEvent: Document do not exists");
-                }
-            }
-        });*/
-
-
+        //updateHeader();
 
     }
     @Override
@@ -142,8 +116,48 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             case R.id.nav_beer:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new Party()).commit();
                 break;
+            case R.id.nav_share:
+                Intent shareIntent = new Intent();
+                shareIntent.setAction(Intent.ACTION_SEND);
+                shareIntent.putExtra(Intent.EXTRA_TEXT, "Download the New Fridge App");
+                shareIntent.setType("text/plain");
+                startActivity(Intent.createChooser(shareIntent, "share via"));
+                break;
 
         }
         return true;
+    }
+
+    public void updateHeader()
+    {
+        final TextView fullName =  findViewById(R.id.profileFullNameNav);
+        final TextView email =  findViewById(R.id.profileMailAdressNav);
+        final ImageView profileImage = findViewById(R.id.ImageProfileNav);
+
+        StorageReference profileRef = storageReference.child("users/" + userId + "/profile.jpg");
+        profileRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+            @Override
+            public void onSuccess(Uri uri) {
+                Picasso.get().load(uri).into(profileImage);
+            }
+        });
+
+
+        DocumentReference documentReference = fStore.collection("users").document(userId);
+        documentReference.addSnapshotListener(new EventListener<DocumentSnapshot>() {
+            @Override
+            public void onEvent(@Nullable DocumentSnapshot value, @Nullable FirebaseFirestoreException error) {
+                if(value.exists()){
+
+                    email.setText(value.getString("email"));
+                    fullName.setText(value.getString("fName"));
+                }
+                else {
+                    Log.d("tag" , "onEvent: Document do not exists");
+                }
+            }
+        });
+
+
     }
 }

@@ -68,7 +68,7 @@ public class NewCardParty extends AppCompatActivity {
         String type = editTextType.getSelectedItem().toString();
         double Price = Double.parseDouble((editTextPrice.getText().toString()));
 
-        if (title.trim().isEmpty() ||  type.trim().isEmpty()) {
+        if (title.trim().isEmpty() ||  type.trim().isEmpty() ) {
             Toast.makeText(this, "Gelieve alles in te vullen!", Toast.LENGTH_SHORT).show();
             return;
         }

@@ -22,6 +22,7 @@ public class ClassAdapter extends FirestoreRecyclerAdapter<Card, ClassAdapter.Cl
         holder.textViewTitle.setText(model.getTitle());
         holder.textViewExpireDate.setText(model.getExpireDate());
         holder.textViewType.setText(model.getType());
+        holder.textViewQuantity.setText(model.getQuantity());
     }
 
     @Override
@@ -39,12 +40,14 @@ public class ClassAdapter extends FirestoreRecyclerAdapter<Card, ClassAdapter.Cl
         TextView textViewTitle;
         TextView textViewExpireDate;
         TextView textViewType;
+        TextView textViewQuantity;
 
         public ClassHolder(View itemView){
             super(itemView);
             textViewTitle = itemView.findViewById(R.id.textview_title);
             textViewExpireDate = itemView.findViewById(R.id.textview_expireDate);
             textViewType = itemView.findViewById(R.id.textview_type);
+            textViewQuantity = itemView.findViewById(R.id.textview_quantity);
         }
     }
 

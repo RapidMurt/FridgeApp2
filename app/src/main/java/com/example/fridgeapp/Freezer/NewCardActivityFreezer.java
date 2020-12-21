@@ -29,6 +29,7 @@ public class NewCardActivityFreezer extends AppCompatActivity {
     private EditText editTextTitle;
     private TextView editTextExpireDate;
     private Spinner editTextType;
+    private EditText editTextQuantity;
 
     private DatePickerDialog.OnDateSetListener onDateSetListener;
 
@@ -39,6 +40,8 @@ public class NewCardActivityFreezer extends AppCompatActivity {
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_close);
         setTitle("Add Product");
         editTextTitle = findViewById(R.id.edit_text_title);
+        editTextQuantity = findViewById(R.id.edit_text_QuantityFridge);
+
         editTextExpireDate = findViewById(R.id.edit_text_expireDate);
         Calendar cal = Calendar.getInstance();
         final int year = cal.get(Calendar.YEAR);
@@ -51,7 +54,7 @@ public class NewCardActivityFreezer extends AppCompatActivity {
 
                 DatePickerDialog dialog = new DatePickerDialog(NewCardActivityFreezer.this , R.style.Theme_AppCompat_DayNight_Dialog_MinWidth,
                         onDateSetListener , year , month , day);
-                dialog.getWindow().setBackgroundDrawable(new ColorDrawable());
+                dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.WHITE));
                 dialog.show();
             }
         });
@@ -88,13 +91,14 @@ public class NewCardActivityFreezer extends AppCompatActivity {
         String title = editTextTitle.getText().toString();
         String expireDate= editTextExpireDate.getText().toString();
         String type = editTextType.getSelectedItem().toString();
-        if (title.trim().isEmpty() || expireDate.trim().isEmpty() || type.trim().isEmpty()) {
+        String quantity = editTextQuantity.getText().toString();
+        if (title.trim().isEmpty() || expireDate.trim().isEmpty() || type.trim().isEmpty() || quantity.isEmpty()) {
             Toast.makeText(this, "Gelieve alles in te vullen!", Toast.LENGTH_SHORT).show();
             return;
         }
         CollectionReference notebookRef = FirebaseFirestore.getInstance()
                 .collection("Freezer");
-        notebookRef.add(new Card(title, expireDate, type));
+        notebookRef.add(new Card(title, expireDate, type, quantity));
         Toast.makeText(this, "card added", Toast.LENGTH_SHORT).show();
         finish();
     }

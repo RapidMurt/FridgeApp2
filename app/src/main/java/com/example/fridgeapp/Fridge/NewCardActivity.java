@@ -30,6 +30,7 @@ public class NewCardActivity extends AppCompatActivity {
     private EditText editTextTitle;
     private TextView editTextExpireDate;
     private Spinner editTextType;
+    private EditText editTextQuantity;
 
     private DatePickerDialog.OnDateSetListener onDateSetListener;
 
@@ -44,6 +45,7 @@ public class NewCardActivity extends AppCompatActivity {
 
 
         editTextTitle = findViewById(R.id.edit_text_title);
+        editTextQuantity = findViewById(R.id.edit_text_QuantityFridge);
 
         editTextExpireDate = findViewById(R.id.edit_text_expireDate);
         Calendar cal = Calendar.getInstance();
@@ -57,7 +59,7 @@ public class NewCardActivity extends AppCompatActivity {
 
                 DatePickerDialog dialog = new DatePickerDialog(NewCardActivity.this , R.style.Theme_AppCompat_DayNight_Dialog_MinWidth,
                         onDateSetListener , year , month , day);
-                dialog.getWindow().setBackgroundDrawable(new ColorDrawable());
+                dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.WHITE));
                 dialog.show();
             }
         });
@@ -97,13 +99,14 @@ public class NewCardActivity extends AppCompatActivity {
         String title = editTextTitle.getText().toString();
         String expireDate= editTextExpireDate.getText().toString();
         String type = editTextType.getSelectedItem().toString();
-        if (title.trim().isEmpty() || expireDate.trim().isEmpty() || type.trim().isEmpty()) {
-            Toast.makeText(this, "Please insert a title , expireDate , Type", Toast.LENGTH_SHORT).show();
+        String quantity = editTextQuantity.getText().toString();
+        if (title.trim().isEmpty() || expireDate.trim().isEmpty() || type.trim().isEmpty() || quantity.isEmpty()) {
+            Toast.makeText(this, "Gelieve alles in te vullen!", Toast.LENGTH_SHORT).show();
             return;
         }
         CollectionReference notebookRef = FirebaseFirestore.getInstance()
                 .collection("Notebook");
-        notebookRef.add(new Card(title, expireDate, type));
+        notebookRef.add(new Card(title, expireDate, type , quantity));
         Toast.makeText(this, "card added", Toast.LENGTH_SHORT).show();
         finish();
     }

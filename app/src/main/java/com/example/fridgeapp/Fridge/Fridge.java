@@ -1,6 +1,8 @@
 package com.example.fridgeapp.Fridge;
 
+import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.media.MediaRouter;
 import android.os.Bundle;
 
@@ -14,13 +16,18 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.accessibility.AccessibilityManager;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.fridgeapp.R;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 
@@ -28,7 +35,6 @@ public class Fridge extends Fragment {
 
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
     private CollectionReference notebookRef = db.collection("Notebook");
-
 
     private ClassAdapter adapter;
 
@@ -46,6 +52,7 @@ public class Fridge extends Fragment {
                 startActivity(new Intent(getActivity() , NewCardActivity.class));
             }
         });
+
         setUpRecyclerView(view);
 
         return view ;
@@ -54,6 +61,7 @@ public class Fridge extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
     }
+
 
     private void setUpRecyclerView(View view){
 
@@ -68,6 +76,7 @@ public class Fridge extends Fragment {
         recyclerView.setHasFixedSize(true); //for preformins reaseons
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext())); //this
         recyclerView.setAdapter(adapter);
+
 
         new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0 , ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
             @Override
